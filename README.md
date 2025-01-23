@@ -1,5 +1,5 @@
-# Cpp_robot_autos
-robot autos for c++ created as a resorce to help teams get at least some functional autonomus
+# robot_autos
+robot autos and drivebases created as a resorce to help teams get at least some functional autonomus
 naming convention is /language/projecttype/drivetrain/manufacturer
 Copyright (C) 2025 team 5557
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
