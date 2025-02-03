@@ -6,6 +6,7 @@
 #include <frc/TimedRobot.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/motorcontrol/PWMSparkMax.h>
+#include <algorithm>
 
 /**
  * This is a demo program showing the use of the DifferentialDrive class.
@@ -20,6 +21,11 @@ class Robot : public frc::TimedRobot {
   frc::Joystick m_leftStick{0};
   frc::Joystick m_rightStick{1};
 
+  static constexpr double kMaxSpeed = 0.8;
+  static constexpr double kSpeedRamp = 0.1;
+  double m_previousLeftSpeed = 0.0;
+  double m_previousRightSpeed = 0.0;
+
  public:
   Robot() {
     wpi::SendableRegistry::AddChild(&m_robotDrive, &m_leftMotor);
@@ -32,8 +38,22 @@ class Robot : public frc::TimedRobot {
   }
 
   void TeleopPeriodic() override {
-    // Drive with tank style
-    m_robotDrive.TankDrive(-m_leftStick.GetY(), -m_rightStick.GetY());
+    // Get joystick inputs
+    double leftInput = -m_leftStick.GetY();
+    double rightInput = -m_rightStick.GetY();
+
+    // Apply ramping and speed limits
+    double leftSpeed = std::clamp(
+        m_previousLeftSpeed + std::clamp(leftInput - m_previousLeftSpeed, -kSpeedRamp, kSpeedRamp),
+        -kMaxSpeed, kMaxSpeed);
+    double rightSpeed = std::clamp(
+        m_previousRightSpeed + std::clamp(rightInput - m_previousRightSpeed, -kSpeedRamp, kSpeedRamp),
+        -kMaxSpeed, kMaxSpeed);
+
+    m_robotDrive.TankDrive(leftSpeed, rightSpeed);
+
+    m_previousLeftSpeed = leftSpeed;
+    m_previousRightSpeed = rightSpeed;
   }
 };
 
