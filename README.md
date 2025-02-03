@@ -1,8 +1,10 @@
 # Robot Autonomous Templates
-robot autos and drivebases created as a resorce to help teams get at least some functional autonomus
-naming convention is /language/projecttype/drivetrain/manufacturer
-Copyright (C) 2025 BBR8ERS-5557
+FRC Robot Autos and drivebases created as a resource to help teams get at least some functional autonomus and a template to work off of
 
+The individual templates can be found in directories with the following naming convention:
+```
+/language/projecttype/drivetrain/manufacturer
+```
 
 ## Features
 
